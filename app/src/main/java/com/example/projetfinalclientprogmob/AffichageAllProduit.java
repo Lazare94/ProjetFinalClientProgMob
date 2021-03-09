@@ -7,12 +7,15 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.example.projetfinalclientprogmob.R.drawable.carrot;
 
 public class AffichageAllProduit extends AppCompatActivity {
 
@@ -21,20 +24,26 @@ public class AffichageAllProduit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affichage_all_produit);
         final ListView list = findViewById(R.id.idListViewAll);
+        ImageView imageview;
+        imageview=(ImageView) findViewById(R.id.idimage);
        // ListView listView;
         DatabaseHandler db = new DatabaseHandler(this);
         SQLiteDatabase bd = db.getReadableDatabase();
-        String var= "R.drawable.";
+        String var= "com.my.app:drawable/";
         List ListProduit;
         ListProduit=db.getAllProduit();
         ArrayList<HashMap<String, Object>> liste = new ArrayList<>();
         for (int i = 0; i <ListProduit.size(); i++) {
            Produit  produit =( Produit)ListProduit.get(i);
+          // String vare=var+ produit.getLienImage();
+           // int id = getResources().getIdentifier(, type, package);
+           // int id = getResources().getIdentifier(vare, null, null);
+           int id = getResources().getIdentifier( produit.getLienImage(), "drawable", getPackageName());
             HashMap<String, Object> map = new HashMap<>();
             map.put("NomProduit", produit.getNomProduit());
             map.put("Description",produit.getDescription());
             map.put("Prix", produit.getPrix());
-            map.put("LienImage",produit.getLienImage());
+            map.put("LienImage",id);
             liste.add(map);
         }
         String[] from = {"NomProduit","Description","Prix","LienImage"};
