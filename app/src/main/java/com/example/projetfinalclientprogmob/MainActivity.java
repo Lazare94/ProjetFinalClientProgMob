@@ -41,7 +41,14 @@ public class MainActivity extends AppCompatActivity {
         db.addProduit(bd,new Produit("Pomme",getString(R.string.description),10.22,"pomme"));
         db.addProduit(bd,new Produit("Porc",getString(R.string.description),45.59,"porc"));
         db.addProduit(bd,new Produit("Viande",getString(R.string.description),53.22,"viande"));
+        db.addProduit(bd,new Produit("Blé",getString(R.string.description),15.59,"ble"));
+        db.addProduit(bd,new Produit("Carrot",getString(R.string.description),14.22,"carrot"));
+        db.addProduit(bd,new Produit("Poisson",getString(R.string.description),9.20,"poisson"));
+        db.addProduit(bd,new Produit("Pomme",getString(R.string.description),10.22,"pomme"));
+        db.addProduit(bd,new Produit("Porc",getString(R.string.description),45.59,"porc"));
+        db.addProduit(bd,new Produit("Viande",getString(R.string.description),53.22,"viande"));
         db.close();
+
     }
 
     public void Loggin(View view) {
