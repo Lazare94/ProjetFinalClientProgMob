@@ -10,14 +10,11 @@
         android:id="@+id/idbtnAjouterProduit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
+        tools:layout_editor_absoluteX="270dp"
+        tools:layout_editor_absoluteY="16dp"
         android:layout_marginStart="212dp"
         android:layout_marginTop="24dp"
         android:onClick="AjouteProduit"
-=======
-        android:layout_marginStart="228dp"
-        android:onClick="AjouterProduit"
->>>>>>> e4046b167a9d3a7b06801641f3b32c5ca0f8f8af
         android:text="Ajouter un produit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
