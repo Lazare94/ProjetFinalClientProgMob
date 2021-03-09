@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="212dp"
         android:layout_marginTop="24dp"
-        android:onClick="AjouterProduit"
+        android:onClick="AjouteProduit"
         android:text="Ajouter un produit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
