@@ -117,12 +117,11 @@
         android:id="@+id/AjouterProduit"
         android:layout_width="413dp"
         android:layout_height="49dp"
-        android:text="Ajouter un produit"
         android:onClick="ajouterProduit"
+        android:text="Ajouter un produit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.825"
-        tools:layout_editor_absoluteX="-1dp" />
+        app:layout_constraintVertical_bias="0.832" />
 
     <ImageView
         android:id="@+id/ImageRechercher"
