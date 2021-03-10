@@ -1,6 +1,7 @@
 package com.example.projetfinalclientprogmob;
 
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.MediaStore;
@@ -36,7 +37,7 @@ public class AffichageAllProduit extends AppCompatActivity {
             HashMap<String, Object> map = new HashMap<>();
             map.put("NomProduit", produit.getNomProduit());
             map.put("Description",produit.getDescription());
-            map.put("Prix", produit.getPrix());
+            map.put("Prix", produit.getPrix()+" $");
             map.put("LienImage",id);
             liste.add(map);
         }
@@ -46,7 +47,7 @@ public class AffichageAllProduit extends AppCompatActivity {
         list.setAdapter(simpleAdapter);
     }
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+   static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -57,7 +58,11 @@ public class AffichageAllProduit extends AppCompatActivity {
         }
     }
     public void AjouteProduit(View view) {
-        dispatchTakePictureIntent();
+       // dispatchTakePictureIntent();
+
+        Context context= getApplicationContext();
+        Intent intent = new Intent(context,AjouterProduit.class);
+        startActivity(intent);
     }
 
 
