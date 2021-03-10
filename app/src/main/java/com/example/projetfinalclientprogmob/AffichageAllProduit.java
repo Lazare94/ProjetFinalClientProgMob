@@ -24,9 +24,6 @@ public class AffichageAllProduit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affichage_all_produit);
         final ListView list = findViewById(R.id.idListViewAll);
-        ImageView imageview;
-        imageview=(ImageView) findViewById(R.id.idimage);
-       // ListView listView;
         DatabaseHandler db = new DatabaseHandler(this);
         SQLiteDatabase bd = db.getReadableDatabase();
         String var= "com.my.app:drawable/";
@@ -35,9 +32,6 @@ public class AffichageAllProduit extends AppCompatActivity {
         ArrayList<HashMap<String, Object>> liste = new ArrayList<>();
         for (int i = 0; i <ListProduit.size(); i++) {
            Produit  produit =( Produit)ListProduit.get(i);
-          // String vare=var+ produit.getLienImage();
-           // int id = getResources().getIdentifier(, type, package);
-           // int id = getResources().getIdentifier(vare, null, null);
            int id = getResources().getIdentifier( produit.getLienImage(), "drawable", getPackageName());
             HashMap<String, Object> map = new HashMap<>();
             map.put("NomProduit", produit.getNomProduit());
