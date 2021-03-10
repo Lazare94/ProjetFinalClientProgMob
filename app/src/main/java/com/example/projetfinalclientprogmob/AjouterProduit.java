@@ -29,7 +29,7 @@ public class AjouterProduit extends AppCompatActivity {
         startActivityForResult(galleryIntent,1);
         
     }
-    public void OnActivityResult(int requestCode, int resultCode, Intent data){
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         try{
 
