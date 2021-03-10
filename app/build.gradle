@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.projetfinalclientprogmob"
-        minSdkVersion 26
-        targetSdkVersion 30
+        minSdkVersion defaultMinSdkVersion
+        targetSdkVersion defaultMinSdkVersion
         versionCode 1
         versionName "1.0"
 
