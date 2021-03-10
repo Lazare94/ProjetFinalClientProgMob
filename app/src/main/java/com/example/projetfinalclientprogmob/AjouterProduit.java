@@ -24,13 +24,14 @@ public class AjouterProduit extends AppCompatActivity {
     }
 
     public void chercherPhoto(View view) {
-         photo = (ImageView) findViewById(R.id.ImageRechercher);
+
         Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(galleryIntent,1);
         
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
+        photo = (ImageView) findViewById(R.id.ImageRechercher);
         try{
 
             if(requestCode == 1 && resultCode == RESULT_OK){
