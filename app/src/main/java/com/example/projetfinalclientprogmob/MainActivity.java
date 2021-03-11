@@ -26,23 +26,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-        SQLiteDatabase bd = db.getReadableDatabase();
-        db.onUpgrade(bd,1,1);
-
-        db.addProduit(bd,new Produit("Blé",getString(R.string.description),15.59,"ble"));
-        db.addProduit(bd,new Produit("Carrot",getString(R.string.description),14.22,"carrot"));
-        db.addProduit(bd,new Produit("Poisson",getString(R.string.description),9.20,"poisson"));
-        db.addProduit(bd,new Produit("Pomme",getString(R.string.description),10.22,"pomme"));
-        db.addProduit(bd,new Produit("Porc",getString(R.string.description),45.59,"porc"));
-        db.addProduit(bd,new Produit("Viande",getString(R.string.description),53.22,"viande"));
-        db.addProduit(bd,new Produit("Blé",getString(R.string.description),15.59,"ble"));
-        db.addProduit(bd,new Produit("Carrot",getString(R.string.description),14.22,"carrot"));
-        db.addProduit(bd,new Produit("Poisson",getString(R.string.description),9.20,"poisson"));
-        db.addProduit(bd,new Produit("Pomme",getString(R.string.description),10.22,"pomme"));
-        db.addProduit(bd,new Produit("Porc",getString(R.string.description),45.59,"porc"));
-        db.addProduit(bd,new Produit("Viande",getString(R.string.description),53.22,"viande"));
-        db.close();
 
     }
 
