@@ -14,7 +14,6 @@ public class Produit implements BaseColumns {
     private double Prix;
     private Bitmap LienImage;
 
-
     public static final String TABLE_PRODUIT="produits";
 
     public Produit(String NomProduit,String Description,double Prix,Bitmap LienImage){
