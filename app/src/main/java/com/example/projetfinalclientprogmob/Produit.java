@@ -1,6 +1,9 @@
 package com.example.projetfinalclientprogmob;
 
+import android.graphics.Bitmap;
 import android.provider.BaseColumns;
+
+import java.sql.Blob;
 
 public class Produit implements BaseColumns {
 
@@ -9,15 +12,24 @@ public class Produit implements BaseColumns {
     private String NomProduit;
     private String Description;
     private double Prix;
-    private String LienImage;
+    private Bitmap LienImage;
+
+
     public static final String TABLE_PRODUIT="produits";
 
-    public Produit(String NomProduit,String Description,double Prix,String LienImage){
+    public Produit(String NomProduit,String Description,double Prix,Bitmap LienImage){
 
         this.NomProduit=NomProduit;
         this.Description=Description;
         this.Prix=Prix;
         this.LienImage=LienImage;
+    }
+    public Bitmap getLienImage() {
+        return LienImage;
+    }
+
+    public void setLienImage(Bitmap lienImage) {
+        this.LienImage = lienImage;
     }
 
     public String getNomProduit() {
@@ -52,11 +64,5 @@ public class Produit implements BaseColumns {
         IdProduit = idProduit;
     }
 
-    public String getLienImage() {
-        return LienImage;
-    }
 
-    public void setLienImage(String lienImage) {
-        LienImage = lienImage;
-    }
 }
