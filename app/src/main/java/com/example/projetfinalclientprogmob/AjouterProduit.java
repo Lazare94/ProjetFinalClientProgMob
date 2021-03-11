@@ -48,6 +48,7 @@ public class AjouterProduit extends AppCompatActivity {
         Intent intent = new Intent(context,AffichageAllProduit.class);
         startActivity(intent);
 
+
     }
 
     public void chercherPhoto(View view) {
@@ -99,5 +100,11 @@ public class AjouterProduit extends AppCompatActivity {
         }
 
 
+    }
+
+    public void Retour(View view) {
+        Context context= getApplicationContext();
+        Intent intent = new Intent(context,AffichageAllProduit.class);
+        startActivity(intent);
     }
 }

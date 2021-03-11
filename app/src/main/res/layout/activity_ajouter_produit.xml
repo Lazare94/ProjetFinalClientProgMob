@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:label="Ajouter un produit"
+    android:background="#2B2929"
     tools:context=".AjouterProduit">
 
     <TextView
@@ -12,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ajouter un produit"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nom "
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/NomProduit"
@@ -38,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Prix"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Prix"
@@ -51,6 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Description"
+        android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Description"
@@ -64,9 +69,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:maxLength="50"
         android:gravity="start|top"
         android:inputType="textMultiLine"
+        android:maxLength="50"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.597"
@@ -80,6 +86,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberDecimal"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.597"
@@ -93,6 +100,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.597"
@@ -115,17 +123,21 @@
 
     <Button
         android:id="@+id/AjouterProduit"
-        android:layout_width="413dp"
-        android:layout_height="49dp"
+        android:layout_width="400dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="443dp"
+        android:layout_marginBottom="28dp"
         android:onClick="ajouterProduit"
         android:text="Ajouter un produit"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.775"
-        tools:layout_editor_absoluteX="-1dp"
+        app:layout_constraintVertical_bias="0.649"
         tools:ignore="MissingConstraints" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="104dp"
         android:layout_height="107dp"
         android:orientation="horizontal"
@@ -142,5 +154,17 @@
             android:layout_height="103dp"
             tools:srcCompat="@tools:sample/avatars" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="149dp"
+        android:layout_marginBottom="163dp"
+        android:onClick="Retour"
+        android:text="Retour"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/AjouterProduit"
+        app:layout_constraintTop_toBottomOf="@+id/AjouterProduit" />
 
 </android.support.constraint.ConstraintLayout>
