@@ -126,8 +126,8 @@
         tools:ignore="MissingConstraints" />
 
     <LinearLayout
-        android:layout_width="123dp"
-        android:layout_height="134dp"
+        android:layout_width="104dp"
+        android:layout_height="107dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -138,8 +138,8 @@
 
         <ImageView
             android:id="@+id/ImageRechercher"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="106dp"
+            android:layout_height="103dp"
             tools:srcCompat="@tools:sample/avatars" />
     </LinearLayout>
 
