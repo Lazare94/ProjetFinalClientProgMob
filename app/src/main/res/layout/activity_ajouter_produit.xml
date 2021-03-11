@@ -104,14 +104,14 @@
         android:id="@+id/ChercherImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chercher une photo"
         android:onClick="chercherPhoto"
+        android:text="Chercher une photo"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ImageRechercher"
-        app:layout_constraintHorizontal_bias="0.394"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.565" />
+        app:layout_constraintVertical_bias="0.472" />
 
     <Button
         android:id="@+id/AjouterProduit"
@@ -121,17 +121,26 @@
         android:text="Ajouter un produit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.832" />
+        app:layout_constraintVertical_bias="0.775"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:ignore="MissingConstraints" />
 
-    <ImageView
-        android:id="@+id/ImageRechercher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="104dp"
+        android:layout_height="107dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.713"
+        app:layout_constraintHorizontal_bias="0.836"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.573"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.477">
+
+        <ImageView
+            android:id="@+id/ImageRechercher"
+            android:layout_width="106dp"
+            android:layout_height="103dp"
+            tools:srcCompat="@tools:sample/avatars" />
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

@@ -5,13 +5,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.Nullable;
 
+import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
-
+    private ByteArrayOutputStream objectBytearrayOutputStream;
+    private byte[] ImageInbytes;
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
@@ -27,7 +33,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     //Créer la table
     private static final String CREER_TABLE=
-            "CREATE TABLE " + Produit.TABLE_PRODUIT + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NOMPRODUIT + " TEXT," +  KEY_Prix + " double," + KEY_LIENIMAGE + " TEXT," + KEY_Description + " TEXT)";
+            "CREATE TABLE " + Produit.TABLE_PRODUIT + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_NOMPRODUIT + " TEXT," +  KEY_Prix + " double," + KEY_LIENIMAGE + " BLOB," + KEY_Description + " TEXT)";
     private static final String SUPPRIMER_TABLE = "DROP TABLE IF EXISTS " + Produit.TABLE_PRODUIT;
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME,null,DATABASE_VERSION);
@@ -52,10 +58,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         if(cursor.moveToFirst()) {
             do {
-                Produit produit=new Produit(cursor.getString(1),cursor.getString(2),cursor.getDouble(3),cursor.getString(4));
+                byte[] ima=cursor.getBlob(3);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(ima, 0, ima.length);
+
+
+              //  ByteBuffer buffer = ByteBuffer.wrap(cursor.getBlob(4));
+              //  bmp.copyPixelsFromBuffer(buffer);
+                Produit produit=new Produit(cursor.getString(1),cursor.getString(4),cursor.getDouble(2),bitmap);
+
                 produit.setNomProduit(cursor.getString(cursor.getColumnIndex(KEY_NOMPRODUIT)));
                 produit.setDescription(cursor.getString(cursor.getColumnIndex(KEY_Description)));
-                produit.setLienImage(cursor.getString(cursor.getColumnIndex(KEY_LIENIMAGE)));
+                produit.setLienImage(bitmap);
                 produit.setIdProduit (cursor.getInt(cursor.getColumnIndex(KEY_ID)));
                 produit.setPrix (cursor.getDouble(cursor.getColumnIndex(KEY_Prix)));
                 ListeProduits.add(produit);
@@ -67,10 +80,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public void addProduit(SQLiteDatabase bd,Produit produit){
+        Bitmap imageToStoreBitmap=produit.getLienImage();
+        objectBytearrayOutputStream= new ByteArrayOutputStream();
+
+        imageToStoreBitmap.compress(Bitmap.CompressFormat.JPEG,100,objectBytearrayOutputStream);
+        ImageInbytes=objectBytearrayOutputStream.toByteArray();
         ContentValues valeurs=new ContentValues();
         valeurs.put(KEY_NOMPRODUIT,produit.getNomProduit());
         valeurs.put(KEY_Description,produit.getDescription());
-        valeurs.put(KEY_LIENIMAGE,produit.getLienImage());
+        valeurs.put(KEY_LIENIMAGE,ImageInbytes);
         valeurs.put(KEY_Prix,produit.getPrix());
         bd.insert(Produit.TABLE_PRODUIT,null,valeurs);
 
@@ -80,7 +98,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues valeurs = new ContentValues();
         valeurs.put(KEY_NOMPRODUIT,produit.getNomProduit());
         valeurs.put(KEY_Description,produit.getDescription());
-        valeurs.put(KEY_LIENIMAGE,produit.getLienImage());
+       // valeurs.put(KEY_LIENIMAGE,produit.getLienImage());
         valeurs.put(KEY_Prix,produit.getPrix());
         bd.update(Produit.TABLE_PRODUIT,valeurs, KEY_ID + "= ?", new String[]{String.valueOf(Produit._ID)});
     }

@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,25 +27,43 @@ public class AffichageAllProduit extends AppCompatActivity {
         setContentView(R.layout.activity_affichage_all_produit);
         final ListView list = findViewById(R.id.idListViewAll);
         DatabaseHandler db = new DatabaseHandler(this);
-        SQLiteDatabase bd = db.getReadableDatabase();
+
+       // SQLiteDatabase bd = db.getReadableDatabase();
         String var= "com.my.app:drawable/";
         List ListProduit;
         ListProduit=db.getAllProduit();
         ArrayList<HashMap<String, Object>> liste = new ArrayList<>();
         for (int i = 0; i <ListProduit.size(); i++) {
            Produit  produit =( Produit)ListProduit.get(i);
-           int id = getResources().getIdentifier( produit.getLienImage(), "drawable", getPackageName());
+
+
             HashMap<String, Object> map = new HashMap<>();
             map.put("NomProduit", produit.getNomProduit());
             map.put("Description",produit.getDescription());
             map.put("Prix", produit.getPrix()+" $");
-            map.put("LienImage",id);
+            map.put("LienImage",produit.getLienImage());
             liste.add(map);
         }
         String[] from = {"NomProduit","Description","Prix","LienImage"};
-        int to[] = {R.id.idNomProduit,R.id.idDescription,R.id.idPrix,R.id.idimage};
+        int to[] = {R.id.idNomProduit,R.id.idDescription,R.id.idPrix,R.id.idimageBIT};
         SimpleAdapter simpleAdapter = new SimpleAdapter(getApplicationContext(), liste,  R.layout.itemlist , from,to);
+        simpleAdapter.setViewBinder(new SimpleAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Object data,
+                                        String textRepresentation) {
+                // TODO Auto-generated method stub
+                if(view instanceof ImageView && data instanceof Bitmap){
+                    ImageView i = (ImageView)view;
+                    i.setImageBitmap((Bitmap) data);
+                    return true;
+                }
+                return false;
+            }
+        });
         list.setAdapter(simpleAdapter);
+        /* Dynamic with new ListView*/
+        simpleAdapter.notifyDataSetChanged();
+       // list.setAdapter(simpleAdapter);
     }
 
    static final int REQUEST_IMAGE_CAPTURE = 1;
