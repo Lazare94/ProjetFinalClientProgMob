@@ -9,9 +9,11 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,25 +29,22 @@ public class AffichageAllProduit extends AppCompatActivity {
         setContentView(R.layout.activity_affichage_all_produit);
         final ListView list = findViewById(R.id.idListViewAll);
         DatabaseHandler db = new DatabaseHandler(this);
-
-       // SQLiteDatabase bd = db.getReadableDatabase();
         String var= "com.my.app:drawable/";
         List ListProduit;
         ListProduit=db.getAllProduit();
         ArrayList<HashMap<String, Object>> liste = new ArrayList<>();
         for (int i = 0; i <ListProduit.size(); i++) {
            Produit  produit =( Produit)ListProduit.get(i);
-
-
             HashMap<String, Object> map = new HashMap<>();
             map.put("NomProduit", produit.getNomProduit());
             map.put("Description",produit.getDescription());
             map.put("Prix", produit.getPrix()+" $");
             map.put("LienImage",produit.getLienImage());
+            map.put("id",produit.getIdProduit());
             liste.add(map);
         }
-        String[] from = {"NomProduit","Description","Prix","LienImage"};
-        int to[] = {R.id.idNomProduit,R.id.idDescription,R.id.idPrix,R.id.idimageBIT};
+        String[] from = {"NomProduit","Description","Prix","LienImage","id"};
+        int to[] = {R.id.idNomProduit,R.id.idDescription,R.id.idPrix,R.id.idimageBIT,R.id.idsuppression};
         SimpleAdapter simpleAdapter = new SimpleAdapter(getApplicationContext(), liste,  R.layout.itemlist , from,to);
         simpleAdapter.setViewBinder(new SimpleAdapter.ViewBinder() {
             @Override
@@ -61,9 +60,19 @@ public class AffichageAllProduit extends AppCompatActivity {
             }
         });
         list.setAdapter(simpleAdapter);
-        /* Dynamic with new ListView*/
         simpleAdapter.notifyDataSetChanged();
-       // list.setAdapter(simpleAdapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Context context= getApplicationContext();
+                TextView IdProduit= (TextView) findViewById(R.id.idsuppression);
+                Intent intent = new Intent(context,Confirmation.class);
+                String var=IdProduit.getText().toString();
+                intent.putExtra("id",var);
+                startActivity(intent);
+            }
+        });
     }
 
    static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -73,12 +82,9 @@ public class AffichageAllProduit extends AppCompatActivity {
         try {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         } catch (ActivityNotFoundException e) {
-            // display error state to the user
         }
     }
     public void AjouteProduit(View view) {
-       // dispatchTakePictureIntent();
-
         Context context= getApplicationContext();
         Intent intent = new Intent(context,AjouterProduit.class);
         startActivity(intent);

@@ -61,9 +61,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 byte[] ima=cursor.getBlob(3);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(ima, 0, ima.length);
 
-
-              //  ByteBuffer buffer = ByteBuffer.wrap(cursor.getBlob(4));
-              //  bmp.copyPixelsFromBuffer(buffer);
                 Produit produit=new Produit(cursor.getString(1),cursor.getString(4),cursor.getDouble(2),bitmap);
 
                 produit.setNomProduit(cursor.getString(cursor.getColumnIndex(KEY_NOMPRODUIT)));
@@ -75,7 +72,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         cursor.close();
-        // db.close();
+         db.close();
         return  ListeProduits;
     }
 
@@ -102,9 +99,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         valeurs.put(KEY_Prix,produit.getPrix());
         bd.update(Produit.TABLE_PRODUIT,valeurs, KEY_ID + "= ?", new String[]{String.valueOf(Produit._ID)});
     }
-    public void Delete(Produit produit ,SQLiteDatabase bd){
+    public void Delete(int id  ,SQLiteDatabase bd){
         bd.delete(Produit.TABLE_PRODUIT, KEY_ID + " = ?",
-                new String[]{String.valueOf(Produit._ID)});
+                new String[]{String.valueOf(id)});
 
     }
 }
