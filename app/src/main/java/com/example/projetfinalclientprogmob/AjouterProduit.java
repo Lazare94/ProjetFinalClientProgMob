@@ -39,6 +39,16 @@ public class AjouterProduit extends AppCompatActivity {
        String Pri= ((EditText)findViewById(R.id.Prix)).getText().toString();
         String NomProduit= ((EditText)findViewById(R.id.NomProduit)).getText().toString();
         String Description= ((EditText)findViewById(R.id.Description)).getText().toString();
+        if(Pri.equals("")||NomProduit.equals("")||Description.equals("")){
+            Toast toast = Toast.makeText(this,"veuillez entrer le Nom le prix et la description du produit", Toast.LENGTH_LONG);
+            toast.show();
+            return;
+        }
+        if(image == null){
+            Toast toast = Toast.makeText(this,"veuillez choisir une image", Toast.LENGTH_LONG);
+            toast.show();
+            return;
+        }
         double Prix=Double.valueOf(Pri).doubleValue();
         Produit produit=new Produit(NomProduit,Description,Prix,image);
        db.addProduit(bd,produit);
