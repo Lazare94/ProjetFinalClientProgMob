@@ -14,6 +14,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -26,29 +27,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Context context= getApplicationContext();
+        Intent intent = new Intent(context,AffichageAllProduit.class);
+        startActivity(intent);
     }
 
     public void Loggin(View view) {
-        String url ="https://mobile1.dinf.cll.qc.ca/Cataloggeur";
-
+       // String url ="https://mobile1.dinf.cll.qc.ca/Cataloggeur";
+        String url ="http://192.168.5.139/QuiGoAuBled/connect.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
        String Email=((EditText)findViewById(R.id.idEmail)).getText().toString();
         String Password=((EditText)findViewById(R.id.idPassword)).getText().toString();
-       // url+="?username" +Email + "&Password=" + Password;
-        JSONObject postData = new JSONObject();
-        try {
-            postData.put("email", Email);
-            postData.put("mdp", Password);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, postData, new Response.Listener<JSONObject>() {
+        StringRequest RequestConnect = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(String response) {
 
                 ValidationUser( response);
             }
@@ -59,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        requestQueue.add(jsonObjectRequest);
+        requestQueue.add(RequestConnect);
 
 
     }
 
-    public void ValidationUser(JSONObject response) {
-        try {
+    public void ValidationUser(String response) {
+        /*try {
             Context context= getApplicationContext();
             if(response.getString("valide").equals("IsConnect")){
 
@@ -80,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 
