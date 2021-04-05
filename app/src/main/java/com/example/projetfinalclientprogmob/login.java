@@ -1,5 +1,6 @@
 package com.example.projetfinalclientprogmob;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class login extends AppCompatActivity {
     }
 
     public void Login(View view) {
+
         String url ="http://192.168.5.139/QuiGoAuBled/Login.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
@@ -43,14 +45,23 @@ public class login extends AppCompatActivity {
         final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(Mdp);
+        ProgressDialog progressDialog= new ProgressDialog(login.this);
+        progressDialog.setTitle("vérification des informations");
+        progressDialog.setMessage("Loading...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMax( 100 );
+        progressDialog.show();
 
         if (!Email.matches(emailPattern) && Phone.isEmpty())
         {
             Toast.makeText(context,"Veuillez remplir l'email ou le téléphone",Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
             return;
         }
         if(!matcher.matches()){
             Toast.makeText(context,"Le mot de passe est incorrect il doit avoir au moins -1 MAJUSCULE -1 minuscule -1 caractére spécial et 1 nombre", Toast.LENGTH_LONG).show();
+            progressDialog.dismiss();
             return;
         }
 
@@ -59,6 +70,7 @@ public class login extends AppCompatActivity {
             public void onResponse(String response) {
 
                 ValidationUser( response,Phone);
+                progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -76,7 +88,6 @@ public class login extends AppCompatActivity {
                 return params;
             }
         };
-
 
         requestQueue.add(RequestConnect);
     }

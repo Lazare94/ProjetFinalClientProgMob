@@ -108,6 +108,7 @@ public class Register extends AppCompatActivity {
             Toast.makeText(context,"Le téléphone est invalide",Toast.LENGTH_SHORT).show();
             return;
         }
+
         StringRequest RequestConnect = new StringRequest( Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
