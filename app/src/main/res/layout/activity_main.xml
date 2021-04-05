@@ -7,57 +7,14 @@
     android:background="@drawable/breakfast_5008022_1920"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/idPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginBottom="36dp"
-        android:text="Email"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="212dp"
-        android:layout_marginEnd="20dp"
-        android:text="Mot de passe"
-        app:layout_constraintEnd_toStartOf="@+id/idPassword"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/idLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="28dp"
-        android:text="Login"
-        android:onClick="Loggin"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/idPassword"
-        tools:ignore="OnClick" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
-        android:text="Ferme Tchappi"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="100dp"
+        android:text="QuiGoauBled"
         android:textAllCaps="true"
         android:textSize="28sp"
         android:textStyle="bold|italic"
@@ -65,16 +22,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/idEmail"
+    <Button
+        android:id="@+id/idlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="12dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:text="lazare.tchappi@yahoo.fr"
-        app:layout_constraintBottom_toTopOf="@+id/idPassword"
-        app:layout_constraintEnd_toEndOf="@+id/idPassword" />
+        android:layout_marginEnd="16dp"
+        android:onClick="log"
+        android:text="login"
+        app:layout_constraintBaseline_toBaselineOf="@+id/idinscri"
+        app:layout_constraintEnd_toStartOf="@+id/idinscri"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/idinscri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="203dp"
+        android:layout_marginEnd="6dp"
+        android:onClick="insc"
+        android:text="Inscription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/idlog"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
