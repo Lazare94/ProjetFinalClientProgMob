@@ -5,7 +5,7 @@ import android.provider.BaseColumns;
 
 import java.sql.Blob;
 
-public class Produit implements BaseColumns {
+public class  Produit implements BaseColumns {
 
 
     private int IdProduit;

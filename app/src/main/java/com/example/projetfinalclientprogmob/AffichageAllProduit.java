@@ -1,5 +1,6 @@
 package com.example.projetfinalclientprogmob;
 
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -10,14 +11,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.example.projetfinalclientprogmob.R.drawable.carrot;
 
@@ -25,13 +38,41 @@ public class AffichageAllProduit extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_affichage_all_produit);
-        final ListView list = findViewById(R.id.idListViewAll);
-        DatabaseHandler db = new DatabaseHandler(this);
-        String var= "com.my.app:drawable/";
+        super.onCreate( savedInstanceState );
+        setContentView( R.layout.activity_affichage_all_produit );
+
+
+        final ListView list = findViewById( R.id.idListViewAll );
+        DatabaseHandler db = new DatabaseHandler( this );
+        String var = "com.my.app:drawable/";
         List ListProduit;
-        ListProduit=db.getAllProduit();
+        ListProduit = db.getAllProduit();
+        String url = "http://192.168.5.139/QuiGoAuBled/Login.php";
+        RequestQueue requestQueue = Volley.newRequestQueue( this );
+        requestQueue.start();
+        ProgressDialog progressDialog = new ProgressDialog( AffichageAllProduit.this );
+        progressDialog.setTitle( "vérification des informations" );
+        progressDialog.setMessage( "Loading..." );
+        progressDialog.setProgressStyle( ProgressDialog.STYLE_HORIZONTAL );
+        progressDialog.setProgressStyle( ProgressDialog.STYLE_SPINNER );
+        progressDialog.setMax( 100 );
+        progressDialog.show();
+
+        StringRequest RequestConnect = new StringRequest( Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                progressDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        } );
+
+        requestQueue.add( RequestConnect );
+
         ArrayList<HashMap<String, Object>> liste = new ArrayList<>();
         for (int i = 0; i <ListProduit.size(); i++) {
            Produit  produit =( Produit)ListProduit.get(i);
