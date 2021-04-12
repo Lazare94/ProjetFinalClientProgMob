@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -26,11 +29,51 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class login extends AppCompatActivity {
-
+    private RadioButton rb;
+    private RadioGroup radioAnimalGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_login );
+        radioAnimalGroup = (RadioGroup) findViewById(R.id.rbGroup);
+        int selectedId;
+        EditText Email=findViewById(R.id.idEmailLogin);
+        EditText Phone=findViewById(R.id.idPhoneLogin);
+        TextView txtEmail=(TextView)findViewById(R.id.textViewEmail);
+        TextView txtPhone=(TextView)findViewById(R.id.textViewPhone);
+        Email.setVisibility(View.GONE);
+        txtEmail.setVisibility(View.GONE);
+        RadioButton a=(RadioButton)findViewById(R.id.rbPhone);
+        a.setChecked( true );
+        radioAnimalGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+                Context context=getApplicationContext();
+                switch (checkedId){
+                    case R.id.rbEmail:
+                        Email.setVisibility(View.VISIBLE);
+                        Phone.setVisibility(View.GONE);
+                        txtEmail.setVisibility(View.VISIBLE);
+                        txtPhone.setVisibility(View.GONE);
+                        break;
+
+                    case R.id.rbPhone:
+                        Email.setVisibility(View.GONE);
+                        Phone.setVisibility(View.VISIBLE);
+                        txtEmail.setVisibility(View.GONE);
+                        txtPhone.setVisibility(View.VISIBLE);
+                        break;
+                    default:
+                        int duration=Toast.LENGTH_LONG;
+                        Toast toast = Toast.makeText(context,"Choix une option de connexion", duration);
+                        toast.show();
+                        break;
+                }
+            }
+        });
+
     }
 
     public void Login(View view) {
