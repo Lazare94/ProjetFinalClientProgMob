@@ -1,6 +1,9 @@
 package com.example.projetfinalclientprogmob;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -108,34 +111,61 @@ public class Register extends AppCompatActivity {
             Toast.makeText(context,"Le téléphone est invalide",Toast.LENGTH_SHORT).show();
             return;
         }
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("Confirmation d'inscription");
+        builder.setMessage("Vérifies et confirmes les informations");
+        builder.setPositiveButton("Confirmation",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ProgressDialog progressDialog= new ProgressDialog(Register.this);
+                        progressDialog.setTitle("Inscription en cours");
+                        progressDialog.setMessage("Loading...");
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        progressDialog.setMax( 100 );
+                        progressDialog.show();
+                        StringRequest RequestConnect = new StringRequest( Request.Method.POST, url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
 
-        StringRequest RequestConnect = new StringRequest( Request.Method.POST, url, new Response.Listener<String>() {
+                                ValidationUser( response,Phone);
+                                progressDialog.dismiss();
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                            }
+                        })
+                        {
+                            @Override
+                            protected Map<String,String> getParams() throws AuthFailureError {
+                                Map<String,String> params = new HashMap<>();
+                                params.put("Nom",Nom);
+                                params.put("Prenom",Prenom);
+                                params.put("Email",Email);
+                                params.put("Phone",Phone);
+                                params.put("Mdp",Mdp);
+                                return params;
+                            }
+                        };
+
+                        requestQueue.add(RequestConnect);
+
+                    }
+                });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
-            public void onResponse(String response) {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
 
-               ValidationUser( response,Phone);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        })
-        {
-            @Override
-            protected Map<String,String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("Nom",Nom);
-                params.put("Prenom",Prenom);
-                params.put("Email",Email);
-                params.put("Phone",Phone);
-                params.put("Mdp",Mdp);
-                return params;
-            }
-        };
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
 
-        requestQueue.add(RequestConnect);
     }
 
 
