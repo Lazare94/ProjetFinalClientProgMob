@@ -13,6 +13,8 @@
         android:layout_marginStart="148dp"
         android:layout_marginTop="292dp"
         android:ems="10"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:hint="Mot de passe"
         android:inputType="textPassword"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,8 +40,11 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         android:textColor="@color/black"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:hint="Email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
         android:id="@+id/idPhoneLogin"
@@ -49,6 +54,8 @@
         android:layout_marginTop="216dp"
         android:inputType="phone"
         android:textColor="@color/black"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:hint="Téléphone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

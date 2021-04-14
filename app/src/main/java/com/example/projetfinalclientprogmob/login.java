@@ -31,6 +31,7 @@ import java.util.regex.Pattern;
 public class login extends AppCompatActivity {
     private RadioButton rb;
     private RadioGroup radioAnimalGroup;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -89,7 +90,7 @@ public class login extends AppCompatActivity {
         final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(Mdp);
-        ProgressDialog progressDialog= new ProgressDialog(login.this);
+         progressDialog= new ProgressDialog(login.this);
         progressDialog.setTitle("vérification des informations");
         progressDialog.setMessage("Loading...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -114,15 +115,15 @@ public class login extends AppCompatActivity {
             public void onResponse(String response) {
 
                 ValidationUser( response,Phone);
-                Context context= getApplicationContext();
-                Intent intente = new Intent(context,AffichageAllProduit.class);
-                startActivity(intente);
                 progressDialog.dismiss();
+
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context,"Échec de connexion", Toast.LENGTH_LONG).show();
                 error.printStackTrace();
+                progressDialog.dismiss();
             }
         })
         {
@@ -143,22 +144,16 @@ public class login extends AppCompatActivity {
         try {
             Context context= getApplicationContext();
             JSONObject json=new JSONObject(response);
-            String message=json.getString("reussir");
-            if(message.equals("exist")){
+            String DonneRecu =json.getString("notUser");
+            if(DonneRecu.equals("Incorrecte")){
 
-                Toast toast = Toast.makeText(context,"Le numéro  téléphone "+ b+" existe déja", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(context,"les informations sont incorrectes.", Toast.LENGTH_LONG);
                 toast.show();
+                return;
 
             }
-            else if(message.equals("inscrit")){
-
-                Toast toast = Toast.makeText(context,"Inscription a reussie ", Toast.LENGTH_LONG);
-                toast.show();
-            }
-            else{
-                Toast toast = Toast.makeText(context,"Inscription a échoué ", Toast.LENGTH_LONG);
-                toast.show();
-            }
+            Intent intente = new Intent(context,AffichageAllProduit.class);
+            startActivity(intente);
 
         } catch (JSONException e) {
             e.printStackTrace();
