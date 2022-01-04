@@ -27,16 +27,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
     ]]>
 
     <TextView
@@ -155,28 +145,8 @@
         app:layout_constraintTop_toTopOf="parent" /><![CDATA[
 
 
-
-
-
     tools:layout_editor_absoluteX="162dp"
         tools:layout_editor_absoluteY="224dp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     ]]>
 
     <EditText

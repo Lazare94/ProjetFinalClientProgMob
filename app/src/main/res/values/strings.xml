@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ProjetFinalClientProgMob</string>
     <string name="description">Produit de la ferme tchappi</string>
+    <string name="Linkregister">Retour</string>
 </resources>

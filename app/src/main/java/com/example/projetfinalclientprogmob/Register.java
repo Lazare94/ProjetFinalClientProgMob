@@ -46,6 +46,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_register );
+
     }
 
     public void ValidationUser(String response,String b) {
@@ -76,15 +77,15 @@ public class Register extends AppCompatActivity {
 
 
     public void Inscription(View view) {
-
-        String url ="http://192.168.5.139/QuiGoAuBled/Enregistrement.php";
+        //String url ="http://192.168.5.139/QuiGoAuBled/Enregistrement.php";
+        String url ="http://10.0.0.27/QuiGoAuBled/Enregistrement.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
-        String Email=((EditText)findViewById(R.id.idEmailUser)).getText().toString();
-        String Mdp=((EditText)findViewById(R.id.idMdp)).getText().toString();
+        String Email=((EditText)findViewById(R.id.idEmailUser)).getText().toString().trim();
+        String Mdp=((EditText)findViewById(R.id.idMdp)).getText().toString().trim();
         String Phone=((EditText)findViewById(R.id.idPhone)).getText().toString();
-        String Nom  =((EditText)findViewById(R.id.idNomUser)).getText().toString();
-        String Prenom=((EditText)findViewById(R.id.idPrenomUser)).getText().toString();
+        String Nom  =((EditText)findViewById(R.id.idNomUser)).getText().toString().trim();
+        String Prenom=((EditText)findViewById(R.id.idPrenomUser)).getText().toString().trim();
         Context context=getApplicationContext();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
@@ -130,7 +131,7 @@ public class Register extends AppCompatActivity {
                         StringRequest RequestConnect = new StringRequest( Request.Method.POST, url, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-
+                                Log.d("APP",response);
                                 ValidationUser( response,Phone);
                                 progressDialog.dismiss();
                             }

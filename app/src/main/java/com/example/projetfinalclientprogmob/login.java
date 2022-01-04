@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -30,6 +32,7 @@ import java.util.regex.Pattern;
 
 public class login extends AppCompatActivity {
     private RadioButton rb;
+    private TextView link;
     private RadioGroup radioAnimalGroup;
     ProgressDialog progressDialog;
     @Override
@@ -79,7 +82,8 @@ public class login extends AppCompatActivity {
 
     public void Login(View view) {
 
-        String url ="http://192.168.5.139/QuiGoAuBled/Login.php";
+        //String url ="http://192.168.5.139/QuiGoAuBled/Login.php";
+        String url ="http://10.0.0.27/QuiGoAuBled/Login.php";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.start();
         String Email=((EditText)findViewById(R.id.idEmailLogin)).getText().toString();
@@ -113,7 +117,7 @@ public class login extends AppCompatActivity {
         StringRequest RequestConnect = new StringRequest( Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                Log.d("APP",response);
                 ValidationUser( response,Phone);
                 progressDialog.dismiss();
 
@@ -121,6 +125,7 @@ public class login extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.d("APP","ERROR"+error);
                 Toast.makeText(context,"Échec de connexion", Toast.LENGTH_LONG).show();
                 error.printStackTrace();
                 progressDialog.dismiss();
@@ -152,11 +157,18 @@ public class login extends AppCompatActivity {
                 return;
 
             }
-            Intent intente = new Intent(context,AffichageAllProduit.class);
-            startActivity(intente);
+            Intent intent = new Intent(context,AffichageAllProduit.class);
+            startActivity(intent);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void configuration_View(View view) {
+    /*    Context context= getApplicationContext();
+        Intent intent = new Intent(context,Register.class);
+        startActivity(intent);*/
+        finish();
     }
 }

@@ -12,9 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="148dp"
         android:layout_marginTop="292dp"
-        android:ems="10"
         android:backgroundTint="@android:color/holo_blue_dark"
-        android:hint="Mot de passe"
+        android:ems="10"
+        android:hint="qweQWE123!@#"
         android:inputType="textPassword"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,11 +37,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="148dp"
         android:layout_marginTop="216dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
         android:ems="10"
+        android:hint="papa@gmail.com"
         android:inputType="textEmailAddress"
         android:textColor="@color/black"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:hint="Email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,10 +52,10 @@
         android:layout_height="52dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="216dp"
-        android:inputType="phone"
-        android:textColor="@color/black"
         android:backgroundTint="@android:color/holo_blue_dark"
         android:hint="Téléphone"
+        android:inputType="phone"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -132,5 +132,21 @@
             android:layout_height="wrap_content"
             android:text="Se connecter avec l'email" />
     </RadioGroup>
+
+    <TextView
+        android:id="@+id/link_text"
+        android:layout_width="114dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="436dp"
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:onClick="configuration_View"
+        android:text="@string/Linkregister"
+        android:textColorLink="#0B3397"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="OnClick" />
 
 </android.support.constraint.ConstraintLayout>
