@@ -91,7 +91,7 @@ public class Register extends AppCompatActivity {
         final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
         Matcher matcher = pattern.matcher(Mdp);
-
+User user= new User(Nom,Prenom,Phone,Email,Mdp);
         if (!Email.matches(emailPattern))
         {
             Toast.makeText(context,"Invalid email address",Toast.LENGTH_SHORT).show();
@@ -116,7 +116,7 @@ public class Register extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle("Confirmation d'inscription");
-        builder.setMessage("Vérifies et confirmes les informations");
+        builder.setMessage("Vérifies et confirmes les informations "+ System.getProperty ("line.separator")+ User.StringUser( user ));
         builder.setPositiveButton("Confirmation",
                 new DialogInterface.OnClickListener() {
                     @Override
